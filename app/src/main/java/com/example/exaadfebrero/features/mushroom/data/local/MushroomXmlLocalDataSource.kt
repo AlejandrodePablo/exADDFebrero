@@ -23,7 +23,7 @@ class MushroomXmlLocalDataSource(private val context: Context) {
     fun findAllAlbum(): List<Album> {
         val json = sharedPref.getString("albums_list", null)
         val type = object : TypeToken<List<Album>>() {}.type
-        return gson.fromJson(json, type)
+        return gson.fromJson(json, type)?: emptyList()
     }
 
     fun saveAllMushrooms(mushrooms: List<Mushroom>) {
@@ -36,7 +36,7 @@ class MushroomXmlLocalDataSource(private val context: Context) {
     fun findAllMushrooms(): List<Mushroom> {
         val json = sharedPref.getString("mushroom_list", null)
         val type = object : TypeToken<List<Mushroom>>() {}.type
-        return gson.fromJson(json, type)
+        return gson.fromJson(json, type)?: emptyList()
     }
 
     fun saveAllStickers(stickers: List<Sticker>) {
@@ -49,7 +49,7 @@ class MushroomXmlLocalDataSource(private val context: Context) {
     fun findAllStickers(): List<Sticker> {
         val json = sharedPref.getString("sticker_list", null)
         val type = object : TypeToken<List<Sticker>>() {}.type
-        return gson.fromJson(json, type)
+        return gson.fromJson(json, type)?: emptyList()
     }
 
     fun deleteAlbum(idAlbum: String) {

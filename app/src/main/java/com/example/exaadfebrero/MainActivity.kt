@@ -1,6 +1,7 @@
 package com.example.exaadfebrero
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,11 +15,11 @@ import com.example.exaadfebrero.features.mushroom.domain.Sticker
 class MainActivity : AppCompatActivity() {
     private lateinit var data: MushroomDataRepository
 
-    val albums = listOf(Album("1", "album1", listOf("1", "2", "3")))
-
     val mushroom1 = Mushroom("1", "Boletus", "Boletus", "Seta Comestible")
     val mushroom2 = Mushroom("2", "Amanita", "Amanita", "Seta Venenosa")
     val mushroom3 = Mushroom("3", " Agaricus Campestris.", " Agaricus", "Seta Comestible")
+
+    val albums = listOf(Album("1", "album1", listOf("1", "2", "3")))
 
     val sticker = Sticker("1", "1", "2", "image1", "4º", "45º", "12/2/2025", "17:54")
 
@@ -28,9 +29,13 @@ class MainActivity : AppCompatActivity() {
 
         data = MushroomDataRepository(MushroomXmlLocalDataSource(this))
 
-        data.saveAllAlbums(albums)
         data.saveMushrooms(listOf(mushroom1, mushroom2, mushroom3))
+        data.saveAllAlbums(albums)
         data.saveStickers(listOf(sticker))
+
+        Log.d("@dev", "${data.getAlbums()}")
+        Log.d("@dev", "${data.getMushroomsToCollect()}")
+        Log.d("@dev", "${data.getStickers()}")
 
     }
 }
